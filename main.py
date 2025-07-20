@@ -19,7 +19,8 @@ def telegram_mesaj_gonder(token, chat_id, mesaj):
 def scrape_oda_bildirimleri():
     results = []
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        # 🔧 Railway uyumlu hale getirildi:
+        browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
         page = browser.new_page()
         page.goto("https://www.kap.org.tr/tr/bildirim-sorgu-sonuc?srcbar=Y&cmp=Y&cat=6&slf=ALL")
         page.wait_for_selector("table tbody tr", timeout=15000)
